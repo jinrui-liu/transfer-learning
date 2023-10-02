@@ -1,195 +1,137 @@
-  0%|          | 0/5 [00:00<?, ?it/s]  0%|          | 0/5 [00:00<?, ?it/s]
-tensor([[0., 0., 0., 0., 0.],
-        [0., 0., 0., 0., 0.],
-        [0., 0., 0., 0., 0.],
-        [0., 0., 0., 0., 0.],
-        [0., 0., 0., 0., 0.]], dtype=torch.float64)
-Traceback (most recent call last):
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/trace_messenger.py", line 174, in __call__
-    ret = self.fn(*args, **kwargs)
-          ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/messenger.py", line 12, in _context_wrap
-    return fn(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/messenger.py", line 12, in _context_wrap
-    return fn(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/Desktop/tanseyLab/transfer_learning/transfer-learning/code/model.py", line 105, in transfer_model
-    spr_transpose = torch.matmul(w, torch.transpose(s, 0, 1))
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: expected scalar type Double but found Float
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/trace_messenger.py", line 174, in __call__
-    ret = self.fn(*args, **kwargs)
-          ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/nn/module.py", line 448, in __call__
-    result = super().__call__(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/infer/autoguide/guides.py", line 510, in forward
-    self._setup_prototype(*args, **kwargs)
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/infer/autoguide/guides.py", line 460, in _setup_prototype
-    super()._setup_prototype(*args, **kwargs)
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/infer/autoguide/guides.py", line 157, in _setup_prototype
-    self.prototype_trace = poutine.block(poutine.trace(model).get_trace)(
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/messenger.py", line 12, in _context_wrap
-    return fn(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/trace_messenger.py", line 198, in get_trace
-    self(*args, **kwargs)
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/trace_messenger.py", line 180, in __call__
-    raise exc from e
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/trace_messenger.py", line 174, in __call__
-    ret = self.fn(*args, **kwargs)
-          ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/messenger.py", line 12, in _context_wrap
-    return fn(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/messenger.py", line 12, in _context_wrap
-    return fn(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/Desktop/tanseyLab/transfer_learning/transfer-learning/code/model.py", line 105, in transfer_model
-    spr_transpose = torch.matmul(w, torch.transpose(s, 0, 1))
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: expected scalar type Double but found Float
-Trace Shapes:        
- Param Sites:        
-Sample Sites:        
-a1_sigma dist       |
-        value       |
-      a1 dist       |
-        value       |
- s_sigma dist       |
-        value       |
-       s dist 5 318 |
-        value 5 318 |
- d_sigma dist       |
-        value       |
-       d dist 5  84 |
-        value 5  84 |
-  sigma1 dist       |
-        value       |
-a2_sigma dist       |
-        value       |
-      a2 dist       |
-        value       |
- w_sigma dist       |
-        value       |
-       c dist     5 |
-        value     5 |
-     u_1 dist 5   1 |
-        value 5   1 |
-     v_1 dist 1   5 |
-        value 1   5 |
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/jinrui.liu/Desktop/tanseyLab/transfer_learning/transfer-learning/code/experiment.py", line 418, in <module>
-    main()
-  File "/Users/jinrui.liu/Desktop/tanseyLab/transfer_learning/transfer-learning/code/experiment.py", line 397, in main
-    k, r = choose_k_r_transfer('transfer', target_train_df, target_col, split_type, n_samp, n_drug, n_steps,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/Desktop/tanseyLab/transfer_learning/transfer-learning/code/experiment.py", line 337, in choose_k_r_transfer
-    train_predict_list, val_predict_list = predict_transfer_wrapper(source_df, source_col, train_df,
-                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/Desktop/tanseyLab/transfer_learning/transfer-learning/code/experiment.py", line 162, in predict_transfer_wrapper
-    train_predict, test_predict = run_predict_transfer(model_seed, source_df, source_col, target_train_df,
-                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/Desktop/tanseyLab/transfer_learning/transfer-learning/code/experiment.py", line 146, in run_predict_transfer
-    train_initial, test_initial = predict_transfer(model_seed, s_idx_src, d_idx_src, obs_src, s_idx_train, d_idx_train,
-                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/Desktop/tanseyLab/transfer_learning/transfer-learning/code/experiment.py", line 111, in predict_transfer
-    svi.step(n_samp, n_drug, s_idx_src, d_idx_src, s_idx_train, d_idx_train, obs_src, len(obs_src), obs_train,
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/infer/svi.py", line 145, in step
-    loss = self.loss_and_grads(self.model, self.guide, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/infer/trace_elbo.py", line 140, in loss_and_grads
-    for model_trace, guide_trace in self._get_traces(model, guide, args, kwargs):
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/infer/elbo.py", line 236, in _get_traces
-    yield self._get_trace(model, guide, args, kwargs)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/infer/trace_elbo.py", line 57, in _get_trace
-    model_trace, guide_trace = get_importance_trace(
-                               ^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/infer/enum.py", line 60, in get_importance_trace
-    guide_trace = poutine.trace(guide, graph_type=graph_type).get_trace(
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/trace_messenger.py", line 198, in get_trace
-    self(*args, **kwargs)
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/trace_messenger.py", line 180, in __call__
-    raise exc from e
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/trace_messenger.py", line 174, in __call__
-    ret = self.fn(*args, **kwargs)
-          ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/nn/module.py", line 448, in __call__
-    result = super().__call__(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/infer/autoguide/guides.py", line 510, in forward
-    self._setup_prototype(*args, **kwargs)
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/infer/autoguide/guides.py", line 460, in _setup_prototype
-    super()._setup_prototype(*args, **kwargs)
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/infer/autoguide/guides.py", line 157, in _setup_prototype
-    self.prototype_trace = poutine.block(poutine.trace(model).get_trace)(
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/messenger.py", line 12, in _context_wrap
-    return fn(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/trace_messenger.py", line 198, in get_trace
-    self(*args, **kwargs)
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/trace_messenger.py", line 180, in __call__
-    raise exc from e
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/trace_messenger.py", line 174, in __call__
-    ret = self.fn(*args, **kwargs)
-          ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/messenger.py", line 12, in _context_wrap
-    return fn(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/miniconda3/envs/pyro/lib/python3.11/site-packages/pyro/poutine/messenger.py", line 12, in _context_wrap
-    return fn(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^
-  File "/Users/jinrui.liu/Desktop/tanseyLab/transfer_learning/transfer-learning/code/model.py", line 105, in transfer_model
-    spr_transpose = torch.matmul(w, torch.transpose(s, 0, 1))
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: expected scalar type Double but found Float
-Trace Shapes:        
- Param Sites:        
-Sample Sites:        
-a1_sigma dist       |
-        value       |
-      a1 dist       |
-        value       |
- s_sigma dist       |
-        value       |
-       s dist 5 318 |
-        value 5 318 |
- d_sigma dist       |
-        value       |
-       d dist 5  84 |
-        value 5  84 |
-  sigma1 dist       |
-        value       |
-a2_sigma dist       |
-        value       |
-      a2 dist       |
-        value       |
- w_sigma dist       |
-        value       |
-       c dist     5 |
-        value     5 |
-     u_1 dist 5   1 |
-        value 5   1 |
-     v_1 dist 1   5 |
-        value 1   5 |
-Trace Shapes:
- Param Sites:
-Sample Sites:
+  0%|          | 0/5 [00:00<?, ?it/s] 80%|████████  | 4/5 [00:00<00:00, 38.35it/s]100%|██████████| 5/5 [00:00<00:00, 44.00it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 110.05it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 110.23it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 111.25it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 113.04it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 98.57it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 96.77it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 97.54it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 98.31it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 98.73it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 88.04it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 87.65it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 86.66it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 86.52it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 86.94it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 78.17it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 51.54it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 78.63it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.12it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 77.62it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 71.51it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 72.20it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 72.30it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 72.14it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 71.88it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 111.89it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 112.60it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 112.82it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 110.40it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 111.70it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 98.50it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 99.22it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 96.90it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 98.57it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 99.00it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 88.40it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 88.38it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 87.25it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 86.71it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 87.60it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 53.23it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.19it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.68it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.43it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.82it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 69.43it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 70.87it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 71.66it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 71.95it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 71.17it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 110.97it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 112.05it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 113.04it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 110.01it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 111.12it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 98.35it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 94.02it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 99.69it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 99.04it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 99.33it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 88.18it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 88.20it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 56.61it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 87.26it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 88.35it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.54it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.48it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 78.17it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 78.33it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.11it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 71.35it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 71.63it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 72.03it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 72.21it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 72.93it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 111.87it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 112.15it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 112.81it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 113.02it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 111.35it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 98.68it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 98.46it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 98.85it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 62.35it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 97.42it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 88.93it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 88.35it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 88.64it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 86.99it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 88.23it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 80.09it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.40it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.37it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.88it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.10it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 72.20it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 71.46it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 72.37it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 71.94it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 72.29it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 111.91it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 112.90it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 113.18it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 113.29it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 112.30it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 60.64it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 98.48it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 98.56it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 99.66it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 98.99it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 87.97it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 88.22it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 88.46it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 87.45it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 85.97it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.45it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.44it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.34it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.47it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 79.35it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 72.26it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 71.26it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 71.91it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 68.50it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 70.16it/s]
+shifting optimal parameters
+under k: 5 optimal r: 1
+done choosing k and r
+under k: 5
+chosen rank r: 1
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 111.16it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 111.73it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 66.99it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 111.73it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 112.00it/s]
+train_corr: 0.5092300302975761
+test_corr: 0.4982759132615259
