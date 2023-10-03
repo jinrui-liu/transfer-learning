@@ -1,0 +1,2 @@
+method,source,target,split_type,holdout_frac,data_fn,write_dir,fold_fn,split_seed,n_steps,k_for_transfer
+transfer,REP,GDSC,random_split,0.8,/Users/jinrui.liu/Desktop/tanseyLab/transfer_learning/transfer-learning/data/drug/rep-gdsc-ctd2-mean-log.csv,/Users/jinrui.liu/Desktop/tanseyLab/transfer_learning/transfer-learning/results/2023-10-03/test_transfer,,0,5,5

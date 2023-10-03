@@ -1,5 +1,6 @@
 import sys
 import numpy as np
+import pandas as pd
 import pyro
 import pyro.util
 import torch
@@ -63,8 +64,10 @@ def get_raw_args(args, n):
 
     # verify that params are valid for method given and save
     check_params(method, source, target, split_type, holdout_frac, data_fn, split_seed, n_steps, k_for_transfer)
-    save_params(method, source, target, split_type, holdout_frac, data_fn, write_dir, fold_fn, split_seed, n_steps,
-                k_for_transfer)
+    pd.DataFrame({'method': [method], 'source': [source], 'target': [target], 'split_type': [split_type],
+                  'holdout_frac': [holdout_frac], 'data_fn': [data_fn], 'write_dir': [write_dir], 'fold_fn': [fold_fn],
+                  'split_seed': [split_seed], 'n_steps': [n_steps], 'k_for_transfer': [k_for_transfer]}).to_csv(
+        write_dir + '/params.csv', index=False)
     return method, source, target, split_type, holdout_frac, data_fn, write_dir, fold_fn, split_seed, n_steps, \
         k_for_transfer
 
@@ -97,7 +100,7 @@ def matrix_transfer(s, d, c, u_loc, v_loc, k):
 
 # Fit a model, extract S, W, and D, and make predictions on the test set
 def predict_transfer(model_seed, s_idx_src, d_idx_src, obs_src, s_idx_train, d_idx_train, obs_train, s_idx_test,
-                     d_idx_test, n_samp, n_drug, n_steps, k, r):
+                     d_idx_test, n_samp, n_drug, n_steps, k, r, write_dir=None):
     # print('Transfer, k: ' + str(k) + ', r: ' + str(r))
     # FIT MODEL
     pyro.clear_param_store()
@@ -113,6 +116,9 @@ def predict_transfer(model_seed, s_idx_src, d_idx_src, obs_src, s_idx_train, d_i
         loss = svi.evaluate_loss(n_samp, n_drug, s_idx_src, d_idx_src, s_idx_train, d_idx_train, obs_src, len(obs_src),
                                  obs_train, len(obs_train), k=k, r=r)
         losses.append(loss)
+    # save the loss for all steps only for actual training
+    if write_dir is not None:
+        pd.DataFrame({'loss': losses, 'step': np.arange(1, n_steps+1)}).to_csv(write_dir + '/losses.csv', index=False)
     # MAKE INITIAL PREDICTIONS BASED ON MODEL
     # retrieve values out for s and d vectors
     s_loc = pyro.param("AutoNormal.locs.s").detach().numpy()
@@ -134,7 +140,7 @@ def predict_transfer(model_seed, s_idx_src, d_idx_src, obs_src, s_idx_train, d_i
 
 # runs prediction model; transforms initial data to pass into predict_transfer
 def run_predict_transfer(model_seed, source_df, source_col, target_train_df, target_col, s_idx_test, d_idx_test, n_samp,
-                         n_drug, n_steps, k, r):
+                         n_drug, n_steps, k, r, write_dir=None):
     s_idx_train, d_idx_train = helpers.get_sample_drug_indices(target_train_df)
     obs_train = target_train_df[target_col].to_numpy()
     mu, sigma, obs_train = helpers.zscore(obs_train)
@@ -145,7 +151,7 @@ def run_predict_transfer(model_seed, source_df, source_col, target_train_df, tar
     obs_src = torch.Tensor(obs_src)
     train_initial, test_initial = predict_transfer(model_seed, s_idx_src, d_idx_src, obs_src, s_idx_train, d_idx_train,
                                                    obs_train, s_idx_test,
-                                                   d_idx_test, n_samp, n_drug, n_steps, k, r)
+                                                   d_idx_test, n_samp, n_drug, n_steps, k, r, write_dir)
     train_predict = helpers.inverse_zscore(train_initial, mu, sigma)
     test_predict = helpers.inverse_zscore(test_initial, mu, sigma)
     assert len(train_predict) == len(s_idx_train)
@@ -155,13 +161,13 @@ def run_predict_transfer(model_seed, source_df, source_col, target_train_df, tar
 
 # wrapper to run transfer model to N_MODELS model seeds
 def predict_transfer_wrapper(source_df, source_col, target_train_df, target_col, s_idx_test, d_idx_test, n_samp, n_drug,
-                             n_steps, k, r):
+                             n_steps, k, r, write_dir=None):
     train_predict_list = []
     test_predict_list = []
     for model_seed in range(0, N_MODELS):
         train_predict, test_predict = run_predict_transfer(model_seed, source_df, source_col, target_train_df,
                                                            target_col, s_idx_test, d_idx_test, n_samp,
-                                                           n_drug, n_steps, k, r)
+                                                           n_drug, n_steps, k, r, write_dir)
         train_predict_list.append(train_predict)
         test_predict_list.append(test_predict)
     return train_predict_list, test_predict_list
@@ -299,8 +305,7 @@ def choose_k_target_only(method, target_train_df, target_col, split_type, n_samp
 
 
 def save_k_r_transfer(write_fn, k, r, optimal_v_corr):
-    d = {'k': k, 'optimal_r': r, 'optimal_v_corr': optimal_v_corr}
-    helpers.write_pickle(d, write_fn)
+    pd.DataFrame({'k': k, 'optimal_r': r, 'optimal_v_corr': optimal_v_corr}).to_csv(write_fn, index=False)
 
 
 def choose_k_r_transfer(method, target_train_df, target_col, split_type, n_samp, n_drug, n_steps, source_df=None,
@@ -318,8 +323,6 @@ def choose_k_r_transfer(method, target_train_df, target_col, split_type, n_samp,
     kf = KFold(n_splits=N_SPLITS, random_state=707, shuffle=True)
     kf.get_n_splits(x)
     # set optimal parameters to -inf for cross validation
-    optimal_r = -np.inf
-    optimal_v_corr = -np.inf
     # start loop through k in K_LIST
     k = k_for_transfer
     ranks = [i + 1 for i in list(range(k))]
@@ -349,14 +352,16 @@ def choose_k_r_transfer(method, target_train_df, target_col, split_type, n_samp,
     optimal_r = ranks[np.argmax(avg_v)]
     assert optimal_r != -np.inf and optimal_v_corr != -np.inf and optimal_r <= k
     print('under k: ' + str(k), 'optimal r: ' + str(optimal_r))
-    save_k_r_transfer(write_fn+f'/k{k}_optimal_param.pkl', k, optimal_r, optimal_v_corr)
+    d = pd.DataFrame({"k": [k], "optimal_r": [optimal_r], "optimal_v_corr": [optimal_v_corr]})
+    d.to_csv(write_fn + f'/k{k}_optimal_param.csv', index=False)
     return k, optimal_r
 
 
 def save_predictions(write_fn, predictions, df):
     assert len(predictions) == len(df)
     d = {'predictions': predictions, 'sample_ids': df['sample_id'].to_numpy(), 'drug_id': df['drug_id'].to_numpy()}
-    helpers.write_pickle(d, write_fn)
+    df_out = pd.DataFrame(data=d)
+    df_out.to_csv(write_fn, index=False)
 
 
 def main():
@@ -398,16 +403,16 @@ def main():
             train_predict_list, test_predict_list = predict_transfer_wrapper(source_df, source_col, target_train_df,
                                                                              target_col, s_idx_test, d_idx_test,
                                                                              n_samp,
-                                                                             n_drug, n_steps, k, r)
+                                                                             n_drug, n_steps, k, r, write_dir)
         train_corr, test_corr, train_predictions, test_predictions = evaluate(train_predict_list, test_predict_list,
                                                                               target_train_df, target_test_df,
                                                                               target_col)
     # ================================
     # EVALUATE PREDICTIONS AND SAVE
-    helpers.write_pickle(train_corr, write_dir + '/train.pkl')
-    helpers.write_pickle(test_corr, write_dir + '/test.pkl')
-    save_predictions(write_dir + '/train_predictions.pkl', train_predictions, target_train_df)
-    save_predictions(write_dir + '/test_predictions.pkl', test_predictions, target_test_df)
+    pd.DataFrame({'train_corr': [train_corr], 'test_corr': [test_corr]}).to_csv(write_dir + '/correlations.csv',
+                                                                                index=False)
+    save_predictions(write_dir + '/train_predictions.csv', train_predictions, target_train_df)
+    save_predictions(write_dir + '/test_predictions.csv', test_predictions, target_test_df)
 
     print('train_corr: ' + str(train_corr))
     print('test_corr: ' + str(test_corr))

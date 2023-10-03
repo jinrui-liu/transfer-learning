@@ -12,7 +12,7 @@ nSteps="1000" # number of steps to train model for
 splitSeed="0" # if using random_split, splitSeed initializes random state; if using sample_split, split seed indexes into the list of folds, read from foldFile
 k_for_transfer_list="15,20,25,30,35,40,45,50" # list of k values to use for transfer learning
 
-cd /home/liuj11/tansey_lab/TL/transfer-learning
+cd /home/liuj11/tansey_lab/TL/transfer-learning || exit
 
 for i in ${k_for_transfer_list//,/ }
 do
