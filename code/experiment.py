@@ -21,14 +21,6 @@ N_MODELS = 5
 N_SPLITS = 5
 
 
-def save_params(method, source, target, split_type, holdout_frac, data_fn, write_dir, fold_fn, split_seed, n_steps,
-                k_for_transfer):
-    params = {'method': method, 'source': source, 'target': target, 'split_type': split_type,
-              'holdout_frac': holdout_frac, 'data_fn': data_fn, 'write_dir': write_dir, 'fold_fn': fold_fn,
-              'split_seed': split_seed, 'n_steps': n_steps, 'k_for_transfer': k_for_transfer}
-    helpers.write_pickle(params, write_dir + '/params.pkl')
-
-
 def check_params(method, source, target, split_type, holdout_frac, fold_fn, split_seed, n_steps, k_for_transfer):
     assert method in ['raw', 'transfer', 'target_only']
     assert target in ['REP', 'GDSC', 'CTD2']
