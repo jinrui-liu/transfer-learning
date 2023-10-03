@@ -345,12 +345,9 @@ def choose_k_r_transfer(method, target_train_df, target_col, split_type, n_samp,
     avg_v = np.mean(v, axis=0)
     assert len(avg_v == len(ranks))
     # set the optimal parameters with k and r where avg_v is maximized
-    if max(avg_v) > optimal_v_corr:
-        print('shifting optimal parameters')
-        optimal_v_corr = max(avg_v)
-        optimal_r = ranks[np.argmax(avg_v)]
-        assert optimal_r != -np.inf and optimal_v_corr != -np.inf
-    assert optimal_r <= k
+    optimal_v_corr = max(avg_v)
+    optimal_r = ranks[np.argmax(avg_v)]
+    assert optimal_r != -np.inf and optimal_v_corr != -np.inf and optimal_r <= k
     print('under k: ' + str(k), 'optimal r: ' + str(optimal_r))
     save_k_r_transfer(write_fn+f'/k{k}_optimal_param.pkl', k, optimal_r, optimal_v_corr)
     return k, optimal_r
@@ -414,6 +411,7 @@ def main():
 
     print('train_corr: ' + str(train_corr))
     print('test_corr: ' + str(test_corr))
+    print('Done!')
 
 
 if __name__ == "__main__":
