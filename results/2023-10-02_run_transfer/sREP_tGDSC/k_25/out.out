@@ -1,0 +1,44 @@
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@ji17>
+Subject: Job 83227077: <code/experiment_juno.sh code transfer REP GDSC random_split .8 data/drug/rep-gdsc-ctd2-mean-log.csv results/2023-10-02_run_transfer/sREP_tGDSC/k_25 "" 1000 0 25> in cluster <juno> Exited
+
+Job <code/experiment_juno.sh code transfer REP GDSC random_split .8 data/drug/rep-gdsc-ctd2-mean-log.csv results/2023-10-02_run_transfer/sREP_tGDSC/k_25 "" 1000 0 25> was submitted from host <juno> by user <liuj11> in cluster <juno> at Mon Oct  2 20:19:15 2023
+Job was executed on host(s) <ji17>, in queue <general>, as user <liuj11> in cluster <juno> at Mon Oct  2 20:19:17 2023
+</home/liuj11> was used as the home directory.
+</home/liuj11/tansey_lab/TL/transfer-learning> was used as the working directory.
+Started at Mon Oct  2 20:19:17 2023
+Terminated at Tue Oct  3 04:19:17 2023
+Results reported at Tue Oct  3 04:19:17 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+code/experiment_juno.sh code transfer REP GDSC random_split .8 data/drug/rep-gdsc-ctd2-mean-log.csv results/2023-10-02_run_transfer/sREP_tGDSC/k_25 "" 1000 0 25
+------------------------------------------------------------
+
+TERM_RUNLIMIT: job killed after reaching LSF run time limit.
+Exited with signal termination: 19.
+
+Resource usage summary:
+
+    CPU time :                                   28728.00 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     8.00 GB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              5
+    Max Threads :                                77
+    Run time :                                   28801 sec.
+    Turnaround time :                            28802 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <results/2023-10-02_run_transfer/sREP_tGDSC/k_25/err.err> for stderr output of this job.
+

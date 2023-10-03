@@ -1,0 +1,48 @@
+shifting optimal parameters
+under k: 5 optimal r: 4
+done choosing k and r
+train_corr: 0.9032359888377618
+test_corr: 0.7226212612191288
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@ji18>
+Subject: Job 83227072: <code/experiment_juno.sh code transfer REP GDSC random_split .8 data/drug/rep-gdsc-ctd2-mean-log.csv results/2023-10-02_run_transfer/sREP_tGDSC/k_5 "" 1000 0 5> in cluster <juno> Done
+
+Job <code/experiment_juno.sh code transfer REP GDSC random_split .8 data/drug/rep-gdsc-ctd2-mean-log.csv results/2023-10-02_run_transfer/sREP_tGDSC/k_5 "" 1000 0 5> was submitted from host <juno> by user <liuj11> in cluster <juno> at Mon Oct  2 20:19:15 2023
+Job was executed on host(s) <ji18>, in queue <general>, as user <liuj11> in cluster <juno> at Mon Oct  2 20:19:16 2023
+</home/liuj11> was used as the home directory.
+</home/liuj11/tansey_lab/TL/transfer-learning> was used as the working directory.
+Started at Mon Oct  2 20:19:16 2023
+Terminated at Mon Oct  2 22:04:34 2023
+Results reported at Mon Oct  2 22:04:34 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+code/experiment_juno.sh code transfer REP GDSC random_split .8 data/drug/rep-gdsc-ctd2-mean-log.csv results/2023-10-02_run_transfer/sREP_tGDSC/k_5 "" 1000 0 5
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   6300.00 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     8.00 GB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              5
+    Max Threads :                                77
+    Run time :                                   6318 sec.
+    Turnaround time :                            6319 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <results/2023-10-02_run_transfer/sREP_tGDSC/k_5/err.err> for stderr output of this job.
+
