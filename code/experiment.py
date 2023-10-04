@@ -351,7 +351,7 @@ def choose_k_r_transfer(method, target_train_df, target_col, split_type, n_samp,
 
 def save_predictions(write_fn, predictions, df):
     assert len(predictions) == len(df)
-    d = {'predictions': predictions, 'sample_ids': df['sample_id'].to_numpy(), 'drug_id': df['drug_id'].to_numpy()}
+    d = {'predictions': predictions, 'sample_id': df['sample_id'].to_numpy(), 'drug_id': df['drug_id'].to_numpy()}
     df_out = pd.DataFrame(data=d)
     df_out.to_csv(write_fn, index=False)
 
